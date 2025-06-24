@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+
+<html lang="ja">
+<head>
+<meta charset="utf-8"/>
+<title>Toinova Works</title>
+<link href="../style.css" rel="stylesheet"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script>
+  const translations = {
+    ja: {
+      title: "見出しサンプル",
+      description: "これは日本語の説明文です。"
+    },
+    en: {
+      title: "Sample Heading",
+      description: "This is a sample description in English."
+    }
+  };
+  function setLanguage(lang) {
+    localStorage.setItem("lang", lang);
+    for (const key in translations[lang]) {
+      const el = document.getElementById(key);
+      if (el) el.textContent = translations[lang][key];
+    }
+  }
+  window.addEventListener("DOMContentLoaded", () => {
+    const lang = localStorage.getItem("lang") || "ja";
+    setLanguage(lang);
+  });
+</script>
+<style>
+.image-container {
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+}
+
+.image-container img {
+  display: block;
+  transition: opacity 0.3s ease;
+}
+
+.overlay-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  text-shadow: 0 0 5px rgba(0,0,0,0.7);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.image-container:hover img {
+  opacity: 0.5;
+}
+
+.image-container:hover .overlay-text {
+  opacity: 1;
+}
+</style>
+</head>
+<body>
+<header>
+<div class="logo">
+<a href="index.html"><img alt="Toinova Logo" src="../logo.png"/></a>
+</div>
+<nav>
+<a href="../index/index.html">works</a>
+<a href="../about/about.html">about</a>
+<a href="../contact/contact.html">contact</a>
+<div class="language-toggle">
+<span onclick="setLanguage('ja')">日本語</span> /
+      <span onclick="setLanguage('en')">English</span>
+</div>
+</nav>
+</header>
+<main class="project-description">
+<div class="image-gallery">
+<div class="image-container"><a href="../works/mountains/mountains.html"><img alt="project1" src="thumbnail_mountains.jpg"/><div class="overlay-text">mountains</div></a></div>
+<div class="image-container"><a href="../works/daylight house/daylight house.html"><img alt="project1" src="thumbnail_akitahouse.jpg"/><div class="overlay-text">daylight house</div></a></div>
+<div class="image-container"><a href="../works/spiral house/spiral house.html"><img alt="project1" src="thumbnail_spiral house.jpg"/><div class="overlay-text">spiral house</div></a></div>
+<div class="image-container"><a href="../works/Andy Warhol museum/Andy Warhol museum.html"><img alt="project1" src="thumbnail_andy warhol museum.jpg"/><div class="overlay-text">Andy Warhol museum</div></a></div>
+<div class="image-container"><a href="../works/kindergarten and gallery/kindergarten and gallery.html"><img alt="project1" src="thumbnail_kindergarten and gallery.jpg"/><div class="overlay-text">kindergarten and gallery</div></a></div>
+<div class="image-container"><a href="../works/broadcast city/broadcast city.html"><img alt="project1" src="thumbnail_broadcast city.jpg"/><div class="overlay-text">broadcast city</div></a></div>
+<div class="image-container"><a href="../works/school in Philippines/school in Philippines.html"><img alt="project1" src="thumbnail_school in Philippines.jpg"/><div class="overlay-text">school in Philippines</div></a></div>
+<div class="image-container"><a href="../works/room in Setagaya/room in Setagaya.html"><img alt="project1" src="thumbnail_room in Setagaya.jpg"/><div class="overlay-text">room in Setagaya</div></a></div>
+<div class="image-container"><a href="../works/Liblio Yukuhashi/Liblio Yukuhashi.html"><img alt="project1" src="thumbnail_Liblio Yukuhashi.jpg"/><div class="overlay-text">Liblio Yukuhashi</div></a></div>
+<div class="image-container"><a href="../works/Shimotsuma junior highschool/Shimotsuma junior highschool.html"><img alt="project1" src="thumbnail_Shimotsuma junior highschool.jpg"/><div class="overlay-text">Shimotsuma junior highschool</div></a></div>
+</div>
+</main>
+<footer>
+  建築設計事務所 トイノバ（一級建築士事務所　東京都知事登録第66718号）<br/>
+  東京都港区北青山1-3-1<br/>
+  050-7116-3640 / contact@toinova.com
+  </footer>
+</body>
+</html>
