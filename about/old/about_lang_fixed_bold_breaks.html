@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+
+<html lang="ja">
+<head>
+<meta charset="utf-8"/>
+<title>toinova_about</title>
+<link href="../style.css" rel="stylesheet"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script>
+const translations = {
+  ja: {
+    title: "建築設計事務所　トイノバについて",
+    description: "建築を考えるうえで大切にしていることを簡潔にまとめる。\n\n代表の井上はこれまでに住宅から、図書館や学校などの教育文化施設、オフィス・商業施設・ホテル等の複合用途で構成される再開発計画まで幅広い建築の設計に携わってきました。\n\n建築はその規模や用途を問わず、場所のポテンシャルとクライアントにとっての価値を最大化する事が大切であると考え、活動しています。\n\n\n\n<strong>代表プロフィール</strong>\n\n井上 寿行(Inoue Toshiyuki)　一級建築士\n\n1986　秋田県出身\n\n2009　東洋大学 工学部 建築学科　卒業\n\n2011　東洋大学大学院 工学研究科 環境デザイン専攻　修了\n\n2011-2018　株式会社　三上建築事務所\n\n2018-2025　株式会社　日本設計"
+  },
+  en: {
+    title: "About Toinova",
+    description: "We have been involved in a wide range of scale design projects from residential housing, educational and cultural facilities such as libraries and schools, to redevelopment projects including offices, commercial facilities, and hotels.\n\nWe believe that architecture, regardless of its scale or use, should maximize the potential of the site and its value to the client."
+  }
+};
+
+function setLanguage(lang) {
+  localStorage.setItem("lang", lang);
+  if (translations[lang]) {
+    for (const key in translations[lang]) {
+      const el = document.getElementById(key);
+      if (el) {
+        if (key === "description") {
+          el.innerHTML = translations[lang][key].replace(/\n/g, "<br>");
+        } else {
+          el.textContent = translations[lang][key];
+        }
+      }
+    }
+  }
+}
+
+window.addEventListener("DOMContentLoaded", () => {
+  const lang = localStorage.getItem("lang") || "ja";
+  setLanguage(lang);
+});
+</script>
+</head>
+<body>
+<header>
+<div class="logo">
+<a href="index.html"><img alt="Toinova Logo" src="../logo.png"/></a>
+</div>
+<nav>
+<a href="../index/index.html">works</a>
+<a href="../about/about.html">about</a>
+<a href="../contact/contact.html">contact</a>
+<div class="language-toggle">
+<span onclick="setLanguage('ja')">日本語</span> /
+      <span onclick="setLanguage('en')">English</span>
+</div>
+</nav>
+</header>
+<main class="project-description">
+<h1 id="title">事務所について</h1>
+<p id="description"></p>
+<img alt="プロフィール写真" class="profile-photo" src="プロフィール写真.jpg"/></main>
+<footer>
+  建築設計事務所 トイノバ（一級建築士事務所　東京都知事登録第66718号）<br/>
+  東京都世田谷区弦巻4-12-2<br/>
+  050-7116-3640 / contact@toinova.jp
+  </footer>
+</body>
+</html>

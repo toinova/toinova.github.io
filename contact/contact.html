@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+
+<html lang="ja">
+<head>
+<meta charset="utf-8"/>
+<title>toinova_contact</title>
+<link href="../style.css" rel="stylesheet"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script>
+const translations = {
+  ja: {
+    title: "お問い合わせ",
+    description: `
+弊社では建築物の設計をはじめとして・工事監理、家具・照明・その他プロダクトのデザイン、都市計画、ランドスケープデザインなど幅広くお承りいたします。<br>
+ご相談は無料です。下記の連絡先までお気軽にお問い合わせくださいませ。<br>
+ご相談の時点で、敷地や条件などが決まっていなくても構いません。お話を伺った上で、様々なアドバイスをさせて頂きながら、クライアントの方とご一緒にプロジェクトを進めさせていただきたいと思います。<br><br>
+電話　050-7116-3640<br>
+メール　contact@toinova.com<br>
+
+`
+  },
+  en: {
+    title: "Contact",
+    description: `
+At Toinova, we offer comprehensive design services that extend beyond architecture—encompassing construction supervision, furniture and lighting design, product development, urban planning, and landscape architecture.<br>
+Your initial consultation is completely free, and we welcome inquiries at any stage—even if your site or specific requirements have not yet been finalized.<br>
+We look forward to hearing your ideas and collaborating with you to develop a project that is thoughtful, functional, and uniquely yours.<br><br>
+Tel　050-7116-3640<br>
+Mail　contact@toinova.com<br>
+`
+  }
+};
+
+function setLanguage(lang) {
+  localStorage.setItem("lang", lang);
+  if (translations[lang]) {
+    for (const key in translations[lang]) {
+      const el = document.getElementById(key);
+      if (el) {
+        el.innerHTML = translations[lang][key];
+      }
+    }
+  }
+}
+
+window.addEventListener("DOMContentLoaded", () => {
+  const lang = localStorage.getItem("lang") || "ja";
+  setLanguage(lang);
+});
+</script>
+</head>
+<body>
+<header>
+<div class="logo">
+<a href="../index/index.html"><img alt="Toinova Logo" src="../logo.png"/></a>
+</div>
+<nav>
+<a href="../index/index.html">works</a>
+<a href="../about/about.html">about</a>
+<a href="../contact/contact.html">contact</a>
+<div class="language-toggle">
+<span onclick="setLanguage('ja')">日本語</span> /
+      <span onclick="setLanguage('en')">English</span>
+</div>
+</nav>
+</header>
+<main class="project-description">
+<h1 id="title">事務所について</h1>
+<p id="description"></p>
+<footer>
+  建築設計事務所 トイノバ（一級建築士事務所　東京都知事登録第66718号）<br/>
+  東京都港区北青山1-3-1<br/>
+  050-7116-3640 / contact＠toinova.com
+  </footer>
+</body>
+</html>

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+
+<html lang="ja">
+<head>
+<meta charset="utf-8"/>
+<title>toinova_about</title>
+<link href="../style.css" rel="stylesheet"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script>
+const translations = {
+  ja: {
+    title: "建築設計事務所　トイノバについて",
+    description: `
+私たちは、与えられた条件にただ応えるのではなく、「問い」を立てることから建築を構想します。<br>
+用途や敷地の特性、使い手の思い、社会の状況に向き合いながら、常に本質を見つめ直し、そこから生まれる新たな可能性をかたちにすることを目指しています。<br>
+建築を通して、今ある風景にまだ見ぬ価値をひらく。<br>
+それが私たち Toinova のミッションです。<br><br>
+<strong>業務内容</strong><br>
+建築物（規模 用途 新築 改築等問わず）の設計・工事監理、家具・照明・その他プロダクトのデザイン、都市計画、ランドスケープデザインなど幅広くお承りいたします。<br><br>
+<strong>業務エリア</strong><br>
+日本国内、国外を問わずお承りいたします。<br><br>
+<strong>代表プロフィール</strong><br>
+井上 寿行 (Inoue Toshiyuki)　一級建築士<br>
+1986　　　&nbsp;&nbsp;&nbsp;秋田県出身<br>
+2009　　　&nbsp;&nbsp;&nbsp;東洋大学工学部建築学科　卒業<br>
+2011　　　&nbsp;&nbsp;&nbsp;東洋大学大学院　工学研究科　環境デザイン専攻　修了<br>
+2011-2018　株式会社　三上建築事務所　https://mikami-arc.co.jp/<br>
+2018-2025　株式会社　日本設計　https://www.nihonsekkei.co.jp/<br><br>
+代表の井上はこれまでに住宅から、図書館や学校などの教育文化施設、オフィス・商業施設・ホテル等の複合用途で構成される再開発計画まで、幅広い建築の設計に携わってきました。<br>
+建築はその規模や用途を問わず、場所のポテンシャルとクライアントにとっての価値を最大化する事が大切であると考え、活動しています。<br>
+
+`
+  },
+  en: {
+    title: "About Toinova",
+    description: `
+At Toinova, we believe architecture should begin with a question.<br>
+Rather than simply answering a brief, we seek to uncover the deeper meanings hidden within a site, a program, or a client's vision.<br>
+Through thoughtful inquiry and design, we aim to reveal new possibilities—transforming ordinary conditions into meaningful and inspiring environments.<br>
+Our mission is to unlock unseen value in the landscape through architecture.<br><br>
+<strong>Services</strong><br>
+We offer a broad range of services including architectural design and construction supervision—regardless of scale, building type, or whether it's new construction or renovation—as well as furniture, lighting, and product design, urban planning, and landscape design.<br><br>
+<strong>Service Area</strong><br>
+We are available for projects both in Japan and internationally.<br><br>
+<strong>Principal</strong><br>
+Toshiyuki Inoue<br>
+Licensed Architect of Japan<br>
+1986　　　&nbsp;&nbsp;&nbsp;born in Akita,Japan<br>
+2009　　　&nbsp;&nbsp;&nbsp;B.Arch, University of Toyo<br>
+2011　　　&nbsp;&nbsp;&nbsp;M.Arch, University of Toyo<br>
+2011-2018　Worked at Mikami architects　https://mikami-arc.co.jp/<br>
+2018-2025　Worked at Nihon Sekkei　https://www.nihonsekkei.co.jp/<br><br>
+I have been designed in a wide range of scale design projects from residential housing,educational and cultural facilities such as libraries and schools,to redevelopment projects including offices, commercial facilities, and hotels.<br><br>
+
+`
+  }
+};
+
+function setLanguage(lang) {
+  localStorage.setItem("lang", lang);
+  if (translations[lang]) {
+    for (const key in translations[lang]) {
+      const el = document.getElementById(key);
+      if (el) {
+        el.innerHTML = translations[lang][key];
+      }
+    }
+  }
+}
+
+window.addEventListener("DOMContentLoaded", () => {
+  const lang = localStorage.getItem("lang") || "ja";
+  setLanguage(lang);
+});
+</script>
+</head>
+<body>
+<header>
+<div class="logo">
+<a href="../index/index.html"><img alt="Toinova Logo" src="../logo.png"/></a>
+</div>
+<nav>
+<a href="../index/index.html">works</a>
+<a href="../about/about.html">about</a>
+<a href="../contact/contact.html">contact</a>
+<div class="language-toggle">
+<span onclick="setLanguage('ja')">日本語</span> /
+      <span onclick="setLanguage('en')">English</span>
+</div>
+</nav>
+</header>
+<main class="project-description">
+<h1 id="title">事務所について</h1>
+<p id="description"></p>
+<img alt="プロフィール写真" class="profile-photo" src="プロフィール写真.jpg"/></main>
+<footer>
+  建築設計事務所 トイノバ（一級建築士事務所　東京都知事登録第66718号）<br/>
+  東京都港区北青山1-3-1<br/>
+  050-7116-3640 / contact@toinova.com
+  </footer>
+</body>
+</html>
