@@ -109,9 +109,22 @@ nav a {
 
 @media (max-width: 768px) {
   .image-gallery {
-    grid-template-columns: 1fr;
+    column-count: 1 !important; /* 1列で表示 */
+    column-gap: 0 !important;
+  }
+
+  .image-gallery a {
+    display: block;
+    width: 100%;
+    margin-bottom: 16px;
+  }
+
+  .image-gallery img {
+    width: 100%;
+    height: auto;
   }
 }
+
 
 /* 作品テキストブロックのスタイル調整 */
 .project-description {
