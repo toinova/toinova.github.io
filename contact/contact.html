@@ -51,19 +51,18 @@ window.addEventListener("DOMContentLoaded", () => {
 </head>
 <body>
 <header>
-  <div class="logo">
-    <a href="../index.html"><img src="img/logo.png" alt="Logo"></a>
-  </div>
-  <div class="header-right">
-    <nav class="main-links">
-      <a href="../index.html">works</a>
-      <a href="../about/about.html">about</a>
-      <a href="../contact/contact.html">contact</a>
-    </nav>
-    <div class="language-toggle">
-      <span data-lang="ja">日本語</span> / <span data-lang="en">English</span>
-    </div>
-  </div>
+<div class="logo">
+<a href="../index.html"><img alt="Toinova Logo" src="../logo.png"/></a>
+</div>
+<nav>
+<a href="../index.html">works</a>
+<a href="../about/about.html">about</a>
+<a href="../contact/contact.html">contact</a>
+<div class="language-toggle">
+<span onclick="setLanguage('ja')">日本語</span> /
+      <span onclick="setLanguage('en')">English</span>
+</div>
+</nav>
 </header>
 
 <main class="project-description">
