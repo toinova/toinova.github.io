@@ -12,10 +12,23 @@ footer {
 }
 
 @media (max-width: 768px) {
-  footer {
-    font-size: 12px;
+  .image-gallery {
+    column-count: 1 !important; /* 1列で表示 */
+    column-gap: 0 !important;
+  }
+
+  .image-gallery a {
+    display: block;
+    width: 100%;
+    margin-bottom: 16px;
+  }
+
+  .image-gallery img {
+    width: 100%;
+    height: auto;
   }
 }
+
 
 /* ヘッダー構成：左上ロゴ／右上リンク＋言語切替 */
 header {
