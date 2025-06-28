@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>toinova</title>
+  <link rel="stylesheet" href="../../style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+<script>
+  const translations = {
+    ja: {
+      title: "Librio Yukuhashi library",
+      description: "このページは準備中です。"
+    },
+    en: {
+      title: "Librio Yukuhashi library",
+      description: "This website is currently in preparation."
+    }
+  };
+  function setLanguage(lang) {
+    localStorage.setItem("lang", lang);
+    for (const key in translations[lang]) {
+      const el = document.getElementById(key);
+      if (el) el.textContent = translations[lang][key];
+    }
+  }
+  window.addEventListener("DOMContentLoaded", () => {
+    const lang = localStorage.getItem("lang") || "ja";
+    setLanguage(lang);
+  });
+</script>
+
+
+<style>
+#preview {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  background-color: rgba(0, 0, 0, 0.85);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+#preview.active {
+  display: flex;
+}
+
+.preview-container {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  max-width: 90vw;
+  max-height: 90vh;
+}
+
+#preview-img {
+  width: 600px; height: auto;
+  
+  object-fit: contain;
+  border-radius: 6px;
+  box-shadow: 0 0 10px rgba(255,255,255,0.3);
+}
+
+.nav-button {
+  font-size: 24px;
+  padding: 10px 15px;
+  background: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+@media (max-width: 640px) {
+  #preview-img {
+    width: 90vw !important;
+  }
+}
+
+</style>
+
+</head>
+<body>
+  
+<header>
+  <div class="logo">
+    <a href="../../index.html"><img src="../../logo.png" alt="Toinova Logo"></a>
+  </div>
+  <nav>
+    <a href="../../index.html">works</a>
+    <a href="../../about/about.html">about</a>
+    <a href="../../contact/contact.html">contact</a>
+    <div class="language-toggle">
+      <span onclick="setLanguage('ja')">日本語</span> /
+      <span onclick="setLanguage('en')">English</span>
+    </div>
+  </nav>
+</header>
+
+  <main class="project-description">
+    <h1 id="title">作品 1</h1>
+    <p id="description">これは作品 1 の説明文です。</p>
+    <div class="image-gallery">
+    </div>
+
+    <div style="margin-top: 20px;">
+      <iframe 
+        src="https://www.archdaily.com/951838/librio-yukuhashi-library-mikami-architects" 
+        width="100%" 
+        height="600" 
+        style="border: 1px solid #ccc;"
+        title=" ArchDaily">
+      </iframe>
+    </div>
+
+  </main>
+  <footer>
+  建築設計事務所 トイノバ<br>
+  一級建築士事務所　東京都知事登録第66718号<br>
+  107-0061 東京都港区北青山1-3-1 3F<br>
+  050-7116-3640 / contact@toinova.com
+  </footer>
+
+<div id="preview" onclick="closePreview(event)">
+  <div class="preview-container" onclick="event.stopPropagation();">
+    <button class="nav-button" onclick="changeImage(-1)">←</button>
+    <img id="preview-img" src="" alt="Preview Image">
+    <button class="nav-button" onclick="changeImage(1)">→</button>
+  </div>
+</div>
+
+<script>
+  let currentIndex = 0;
+  let galleryImages = [];
+
+  function openPreview(index) {
+    currentIndex = index;
+    const preview = document.getElementById("preview");
+    const img = document.getElementById("preview-img");
+    img.src = galleryImages[currentIndex].src;
+    preview.classList.add("active");
+  }
+
+  function closePreview(event) {
+    const preview = document.getElementById("preview");
+    preview.classList.remove("active");
+  }
+
+  function changeImage(direction) {
+    currentIndex = (currentIndex + direction + galleryImages.length) % galleryImages.length;
+    document.getElementById("preview-img").src = galleryImages[currentIndex].src;
+  }
+
+  window.addEventListener("DOMContentLoaded", () => {
+    galleryImages = Array.from(document.querySelectorAll('.image-gallery img'));
+    galleryImages.forEach((img, index) => {
+      img.style.cursor = "zoom-in";
+      img.addEventListener("click", () => openPreview(index));
+    });
+  });
+</script>
+
+</body>
+</html>
