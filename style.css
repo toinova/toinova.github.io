@@ -46,7 +46,7 @@ header .logo img {
 nav {
   display: flex;
   align-items: center;
-  gap: 30px;
+  gap: 20px;
 }
 
 nav a {
@@ -204,7 +204,7 @@ header {
 .nav-wrapper {
   display: flex;
   align-items: center;
-  gap: 30px;
+  gap: 20px;
 }
 
 /* スマホ表示時の調整 */
