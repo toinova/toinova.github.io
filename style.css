@@ -188,24 +188,53 @@ nav a {
 .image-container:hover .overlay-text {
   opacity: 1;
 }
+/* 共通スタイル */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+}
+
+.logo img {
+  height: 40px;
+}
+
+/* nav-wrapper 全体のスタイル */
+.nav-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+/* スマホ表示時の調整 */
 @media (max-width: 768px) {
+  header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
   .nav-wrapper {
+    width: 100%;
     display: flex;
     flex-direction: column;
     align-items: flex-end;
-    gap: 6px;
-    margin-top: 10px;
     text-align: right;
+    margin-top: 10px;
   }
 
   .nav-links {
     display: flex;
-    flex-direction: row;
     gap: 16px;
+    justify-content: flex-end;
+    width: 100%;
   }
 
   .language-toggle {
-    margin-top: 4px;
+    margin-top: 6px;
+  }
+
+  .logo {
+    align-self: flex-start;
   }
 }
-
