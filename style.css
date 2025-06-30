@@ -188,4 +188,24 @@ nav a {
 .image-container:hover .overlay-text {
   opacity: 1;
 }
+@media (max-width: 768px) {
+  .nav-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 6px;
+    margin-top: 10px;
+    text-align: right;
+  }
+
+  .nav-links {
+    display: flex;
+    flex-direction: row;
+    gap: 16px;
+  }
+
+  .language-toggle {
+    margin-top: 4px;
+  }
+}
 
