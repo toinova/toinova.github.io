@@ -10,7 +10,12 @@
   const translations = {
     ja: {
       title: "Andy Warhol museum",
-      description: "このページは準備中です。"
+    description: `
+このページは準備中です<br>
+このページは準備中です<br>
+このページは準備中です<br>
+このページは準備中です<br>
+`
     },
     en: {
       title: "Andy Warhol museum",
@@ -21,7 +26,7 @@
     localStorage.setItem("lang", lang);
     for (const key in translations[lang]) {
       const el = document.getElementById(key);
-      if (el) el.textContent = translations[lang][key];
+      if (el) el.innerHTML = translations[lang][key];
     }
   }
   window.addEventListener("DOMContentLoaded", () => {
