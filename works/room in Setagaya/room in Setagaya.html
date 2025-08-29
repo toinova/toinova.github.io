@@ -10,18 +10,28 @@
   const translations = {
     ja: {
       title: "room in Setagaya",
-      description: "このページは準備中です。"
+      description: `
+このページは準備中です<br>
+このページは準備中です<br>
+このページは準備中です<br>
+このページは準備中です<br>
+`
     },
     en: {
       title: "room in Setagaya",
-      description: "This website is currently in preparation."
+             description: `
+This website is currently in preparation.<br>
+This website is currently in preparation.<br>
+This website is currently in preparation.<br>
+This website is currently in preparation.<br>
+`
     }
   };
   function setLanguage(lang) {
     localStorage.setItem("lang", lang);
     for (const key in translations[lang]) {
       const el = document.getElementById(key);
-      if (el) el.textContent = translations[lang][key];
+      if (el) el.innerHTML = translations[lang][key];
     }
   }
   window.addEventListener("DOMContentLoaded", () => {
