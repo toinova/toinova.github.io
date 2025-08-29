@@ -31,7 +31,7 @@ This website is currently in preparation.<br>
     localStorage.setItem("lang", lang);
     for (const key in translations[lang]) {
       const el = document.getElementById(key);
-      if (el) el.textContent = translations[lang][key];
+      if (el) el.innerHTML = translations[lang][key];
     }
   }
   window.addEventListener("DOMContentLoaded", () => {
