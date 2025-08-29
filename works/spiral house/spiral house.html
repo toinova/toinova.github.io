@@ -1,11 +1,11 @@
 <!DOCTYPE html>
+
 <html lang="ja">
 <head>
-  <meta charset="UTF-8">
-  <title>toinova</title>
-  <link rel="stylesheet" href="../../style.css">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
+<meta charset="utf-8"/>
+<title>toinova</title>
+<link href="../../style.css" rel="stylesheet"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <script>
   const translations = {
     ja: {
@@ -39,8 +39,6 @@ This website is currently in preparation.<br>
     setLanguage(lang);
   });
 </script>
-
-
 <style>
 #preview {
   position: fixed;
@@ -89,56 +87,51 @@ This website is currently in preparation.<br>
 }
 
 </style>
-
 </head>
 <body>
-  
 <header>
-  <div class="logo">
-    <a href="../../index.html"><img src="../../logo.png" alt="Toinova Logo"></a>
-  </div>
-  <nav>
-    <a href="../../index.html">works</a>
-    <a href="../../about/about.html">about</a>
-    <a href="../../contact/contact.html">contact</a>
-    <div class="language-toggle">
-      <span onclick="setLanguage('ja')">日本語</span> /
+<div class="logo">
+<a href="../../index.html"><img alt="Toinova Logo" src="../../logo.png"/></a>
+</div>
+<nav>
+<a href="../../index.html">works</a>
+<a href="../../about/about.html">about</a>
+<a href="../../contact/contact.html">contact</a>
+<div class="language-toggle">
+<span onclick="setLanguage('ja')">日本語</span> /
       <span onclick="setLanguage('en')">English</span>
-    </div>
-  </nav>
+</div>
+</nav>
 </header>
-
-  <main class="project-description">
-    <h1 id="title">作品 1</h1>
-    <p id="description">これは作品 1 の説明文です。</p>
-    <div class="image-gallery">
-<a href="#"><img src="img1.jpg" alt="img1"></a>
-<a href="#"><img src="img2.jpg" alt="img2"></a>
-<a href="#"><img src="img3.jpg" alt="img3"></a>
-<a href="#"><img src="img4.jpg" alt="img4"></a>
-<a href="#"><img src="img5.jpg" alt="img5"></a>
-<a href="#"><img src="img6.jpg" alt="img6"></a>
-<a href="#"><img src="img7.jpg" alt="img7"></a>
-<a href="#"><img src="img8.jpg" alt="img8"></a>
-<a href="#"><img src="img9.jpg" alt="img9"></a>
-<a href="#"><img src="img10.jpg" alt="img10"></a>
-    </div>
-  </main>
-  <footer>
-  建築設計事務所 トイノバ<br>
-  一級建築士事務所　東京都知事登録第66718号<br>
-  107-0061 東京都港区北青山1-3-1 3F<br>
+<main class="project-description">
+<h1 id="title">作品 1</h1>
+<p id="description">これは作品 1 の説明文です。</p>
+<div class="image-gallery">
+<a href="#"><img alt="img1" src="img1.jpg"/></a>
+<a href="#"><img alt="img2" src="img2.jpg"/></a>
+<a href="#"><img alt="img3" src="img3.jpg"/></a>
+<a href="#"><img alt="img4" src="img4.jpg"/></a>
+<a href="#"><img alt="img5" src="img5.jpg"/></a>
+<a href="#"><img alt="img6" src="img6.jpg"/></a>
+<a href="#"><img alt="img7" src="img7.jpg"/></a>
+<a href="#"><img alt="img8" src="img8.jpg"/></a>
+<a href="#"><img alt="img9" src="img9.jpg"/></a>
+<a href="#"><img alt="img10" src="img10.jpg"/></a>
+</div>
+</main>
+<footer>
+  建築設計事務所 トイノバ<br/>
+  一級建築士事務所　東京都知事登録第66718号<br/>
+  107-0061 東京都港区北青山1-3-1 3F<br/>
   050-7116-3640 / contact@toinova.com
   </footer>
-
 <div id="preview" onclick="closePreview(event)">
-  <div class="preview-container" onclick="event.stopPropagation();">
-    <button class="nav-button" onclick="changeImage(-1)">←</button>
-    <img id="preview-img" src="" alt="Preview Image">
-    <button class="nav-button" onclick="changeImage(1)">→</button>
-  </div>
+<div class="preview-container" onclick="event.stopPropagation();">
+<button class="nav-button" onclick="changeImage(-1)">←</button>
+<img alt="Preview Image" id="preview-img" src=""/>
+<button class="nav-button" onclick="changeImage(1)">→</button>
 </div>
-
+</div>
 <script>
   let currentIndex = 0;
   let galleryImages = [];
@@ -169,6 +162,5 @@ This website is currently in preparation.<br>
     });
   });
 </script>
-
 </body>
 </html>
