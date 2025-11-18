@@ -41,54 +41,7 @@ At that point, it would no longer be called a “house,” but rather an archite
     setLanguage(lang);
   });
 </script>
-<style>
-#preview {
-  position: fixed;
-  top: 0; left: 0;
-  width: 100vw; height: 100vh;
-  background-color: rgba(0, 0, 0, 0.85);
-  display: none;
-  justify-content: center;
-  align-items: center;
-  z-index: 9999;
-}
 
-#preview.active {
-  display: flex;
-}
-
-.preview-container {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-  max-width: 90vw;
-  max-height: 90vh;
-}
-
-#preview-img {
-  width: 600px; height: auto;
-  
-  object-fit: contain;
-  border-radius: 6px;
-  box-shadow: 0 0 10px rgba(255,255,255,0.3);
-}
-
-.nav-button {
-  font-size: 24px;
-  padding: 10px 15px;
-  background: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-@media (max-width: 640px) {
-  #preview-img {
-    width: 90vw !important;
-  }
-}
-
-</style>
 </head>
 <body>
 <header>
@@ -109,16 +62,16 @@ At that point, it would no longer be called a “house,” but rather an archite
 <h1 id="title">作品 1</h1>
 <p id="description">これは作品 1 の説明文です。</p>
 <div class="image-gallery">
-<a href="#"><img alt="img1" src="img1.jpg"/></a>
-<a href="#"><img alt="img2" src="img2.jpg"/></a>
-<a href="#"><img alt="img3" src="img3.jpg"/></a>
-<a href="#"><img alt="img4" src="img4.jpg"/></a>
-<a href="#"><img alt="img5" src="img5.jpg"/></a>
-<a href="#"><img alt="img6" src="img6.jpg"/></a>
-<a href="#"><img alt="img7" src="img7.jpg"/></a>
-<a href="#"><img alt="img8" src="img8.jpg"/></a>
-<a href="#"><img alt="img9" src="img9.jpg"/></a>
-<a href="#"><img alt="img10" src="img10.jpg"/></a>
+<img alt="img1" src="img1.jpg"/>
+<img alt="img2" src="img2.jpg"/>
+<img alt="img3" src="img3.jpg"/>
+<img alt="img4" src="img4.jpg"/>
+<img alt="img5" src="img5.jpg"/>
+<img alt="img6" src="img6.jpg"/>
+<img alt="img7" src="img7.jpg"/>
+<img alt="img8" src="img8.jpg"/>
+<img alt="img9" src="img9.jpg"/>
+<img alt="img10" src="img10.jpg"/>
 </div>
 </main>
 <footer>
@@ -128,35 +81,5 @@ At that point, it would no longer be called a “house,” but rather an archite
   070-9163-2318 / contact@toinova.com
   </footer>
 
-<script>
-  let currentIndex = 0;
-  let galleryImages = [];
-
-  function openPreview(index) {
-    currentIndex = index;
-    const preview = document.getElementById("preview");
-    const img = document.getElementById("preview-img");
-    img.src = galleryImages[currentIndex].src;
-    preview.classList.add("active");
-  }
-
-  function closePreview(event) {
-    const preview = document.getElementById("preview");
-    preview.classList.remove("active");
-  }
-
-  function changeImage(direction) {
-    currentIndex = (currentIndex + direction + galleryImages.length) % galleryImages.length;
-    document.getElementById("preview-img").src = galleryImages[currentIndex].src;
-  }
-
-  window.addEventListener("DOMContentLoaded", () => {
-    galleryImages = Array.from(document.querySelectorAll('.image-gallery img'));
-    galleryImages.forEach((img, index) => {
-      img.style.cursor = "zoom-in";
-      img.addEventListener("click", () => openPreview(index));
-    });
-  });
-</script>
 </body>
 </html>
