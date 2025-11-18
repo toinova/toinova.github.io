@@ -112,7 +112,7 @@ As visitors move through the sequence of spaces between the boxes, they experien
     <h1 id="title">作品 1</h1>
     <p id="description">これは作品 1 の説明文です。</p>
     <div class="image-gallery">
-<img src="img1.jpg" alt="img1">
+<a href="#"><img src="img1.jpg" alt="img1"></a>
 <a href="#"><img src="img2.jpg" alt="img2"></a>
 <a href="#"><img src="img3.jpg" alt="img3"></a>
 <a href="#"><img src="img4.jpg" alt="img4"></a>
@@ -128,14 +128,6 @@ As visitors move through the sequence of spaces between the boxes, they experien
   107-0061 東京都港区北青山1-3-1 3F<br>
   070-9163-2318 / contact@toinova.com
   </footer>
-
-<div id="preview" onclick="closePreview(event)">
-  <div class="preview-container" onclick="event.stopPropagation();">
-    <button class="nav-button" onclick="changeImage(-1)">←</button>
-    <img id="preview-img" src="" alt="Preview Image">
-    <button class="nav-button" onclick="changeImage(1)">→</button>
-  </div>
-</div>
 
 <script>
   let currentIndex = 0;
