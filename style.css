@@ -80,7 +80,7 @@ nav a {
 .image-gallery img {
   width: 100%;
   margin-bottom: 16px;
-  cursor: zoom-in;
+  cursor: default;
   display: block;
   border: 1px solid #ccc;
   border-radius: 4px;
