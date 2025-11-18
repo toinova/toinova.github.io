@@ -39,7 +39,8 @@ As visitors move through the sequence of spaces between the boxes, they experien
     setLanguage(lang);
   });
 </script>
-
+</head>
+  
 <body>
   
 <header>
@@ -77,37 +78,6 @@ As visitors move through the sequence of spaces between the boxes, they experien
   107-0061 東京都港区北青山1-3-1 3F<br>
   070-9163-2318 / contact@toinova.com
   </footer>
-
-<script>
-  let currentIndex = 0;
-  let galleryImages = [];
-
-  function openPreview(index) {
-    currentIndex = index;
-    const preview = document.getElementById("preview");
-    const img = document.getElementById("preview-img");
-    img.src = galleryImages[currentIndex].src;
-    preview.classList.add("active");
-  }
-
-  function closePreview(event) {
-    const preview = document.getElementById("preview");
-    preview.classList.remove("active");
-  }
-
-  function changeImage(direction) {
-    currentIndex = (currentIndex + direction + galleryImages.length) % galleryImages.length;
-    document.getElementById("preview-img").src = galleryImages[currentIndex].src;
-  }
-
-  window.addEventListener("DOMContentLoaded", () => {
-    galleryImages = Array.from(document.querySelectorAll('.image-gallery img'));
-    galleryImages.forEach((img, index) => {
-      img.style.cursor = "zoom-in";
-      img.addEventListener("click", () => openPreview(index));
-    });
-  });
-</script>
 
 </body>
 </html>
