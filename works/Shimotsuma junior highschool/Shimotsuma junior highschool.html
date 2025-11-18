@@ -42,56 +42,6 @@ When the gymnasium is eventually rebuilt in the future, this distinctive large r
   });
 </script>
 
-
-<style>
-#preview {
-  position: fixed;
-  top: 0; left: 0;
-  width: 100vw; height: 100vh;
-  background-color: rgba(0, 0, 0, 0.85);
-  display: none;
-  justify-content: center;
-  align-items: center;
-  z-index: 9999;
-}
-
-#preview.active {
-  display: flex;
-}
-
-.preview-container {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-  max-width: 90vw;
-  max-height: 90vh;
-}
-
-#preview-img {
-  width: 600px; height: auto;
-  
-  object-fit: contain;
-  border-radius: 6px;
-  box-shadow: 0 0 10px rgba(255,255,255,0.3);
-}
-
-.nav-button {
-  font-size: 24px;
-  padding: 10px 15px;
-  background: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-@media (max-width: 640px) {
-  #preview-img {
-    width: 90vw !important;
-  }
-}
-
-</style>
-
 </head>
 <body>
   
@@ -133,37 +83,6 @@ When the gymnasium is eventually rebuilt in the future, this distinctive large r
   107-0061 東京都港区北青山1-3-1 3F<br>
   070-9163-2318 / contact@toinova.com
   </footer>
-
-<script>
-  let currentIndex = 0;
-  let galleryImages = [];
-
-  function openPreview(index) {
-    currentIndex = index;
-    const preview = document.getElementById("preview");
-    const img = document.getElementById("preview-img");
-    img.src = galleryImages[currentIndex].src;
-    preview.classList.add("active");
-  }
-
-  function closePreview(event) {
-    const preview = document.getElementById("preview");
-    preview.classList.remove("active");
-  }
-
-  function changeImage(direction) {
-    currentIndex = (currentIndex + direction + galleryImages.length) % galleryImages.length;
-    document.getElementById("preview-img").src = galleryImages[currentIndex].src;
-  }
-
-  window.addEventListener("DOMContentLoaded", () => {
-    galleryImages = Array.from(document.querySelectorAll('.image-gallery img'));
-    galleryImages.forEach((img, index) => {
-      img.style.cursor = "zoom-in";
-      img.addEventListener("click", () => openPreview(index));
-    });
-  });
-</script>
 
 </body>
 </html>
