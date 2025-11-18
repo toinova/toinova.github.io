@@ -38,56 +38,6 @@ In areas with pronounced undulations, floors come closer together, at times conn
   });
 </script>
 
-
-<style>
-#preview {
-  position: fixed;
-  top: 0; left: 0;
-  width: 100vw; height: 100vh;
-  background-color: rgba(0, 0, 0, 0.85);
-  display: none;
-  justify-content: center;
-  align-items: center;
-  z-index: 9999;
-}
-
-#preview.active {
-  display: flex;
-}
-
-.preview-container {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-  max-width: 90vw;
-  max-height: 90vh;
-}
-
-#preview-img {
-  width: 600px; height: auto;
-  
-  object-fit: contain;
-  border-radius: 6px;
-  box-shadow: 0 0 10px rgba(255,255,255,0.3);
-}
-
-.nav-button {
-  font-size: 24px;
-  padding: 10px 15px;
-  background: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-@media (max-width: 640px) {
-  #preview-img {
-    width: 90vw !important;
-  }
-}
-
-</style>
-
 </head>
 <body>
   
@@ -110,16 +60,16 @@ In areas with pronounced undulations, floors come closer together, at times conn
     <h1 id="title">作品 1</h1>
     <p id="description">これは作品 1 の説明文です。</p>
     <div class="image-gallery">
-<a href="#"><img src="img1.jpg" alt="img1"></a>
-<a href="#"><img src="img2.jpg" alt="img2"></a>
-<a href="#"><img src="img3.jpg" alt="img3"></a>
-<a href="#"><img src="img4.jpg" alt="img4"></a>
-<a href="#"><img src="平面アニメーション.gif" alt="平面アニメーション"></a>
-<a href="#"><img src="断面アニメーション.gif" alt="断面アニメーション"></a>
-<a href="#"><img src="img5.jpg" alt="img5"></a>
-<a href="#"><img src="img6.jpg" alt="img6"></a>
-<a href="#"><img src="img7.jpg" alt="img7"></a>
-<a href="#"><img src="img8.jpg" alt="img8"></a>
+<img src="img1.jpg" alt="img1">
+<img src="img2.jpg" alt="img2">
+<img src="img3.jpg" alt="img3">
+<img src="img4.jpg" alt="img4">
+<img src="平面アニメーション.gif" alt="平面アニメーション">
+<img src="断面アニメーション.gif" alt="断面アニメーション">
+<img src="img5.jpg" alt="img5">
+<img src="img6.jpg" alt="img6">
+<img src="img7.jpg" alt="img7">
+<img src="img8.jpg" alt="img8">
     </div>
   </main>
   <footer>
@@ -128,37 +78,6 @@ In areas with pronounced undulations, floors come closer together, at times conn
   107-0061 東京都港区北青山1-3-1 3F<br>
   070-9163-2318 / contact@toinova.com
   </footer>
-
-<script>
-  let currentIndex = 0;
-  let galleryImages = [];
-
-  function openPreview(index) {
-    currentIndex = index;
-    const preview = document.getElementById("preview");
-    const img = document.getElementById("preview-img");
-    img.src = galleryImages[currentIndex].src;
-    preview.classList.add("active");
-  }
-
-  function closePreview(event) {
-    const preview = document.getElementById("preview");
-    preview.classList.remove("active");
-  }
-
-  function changeImage(direction) {
-    currentIndex = (currentIndex + direction + galleryImages.length) % galleryImages.length;
-    document.getElementById("preview-img").src = galleryImages[currentIndex].src;
-  }
-
-  window.addEventListener("DOMContentLoaded", () => {
-    galleryImages = Array.from(document.querySelectorAll('.image-gallery img'));
-    galleryImages.forEach((img, index) => {
-      img.style.cursor = "zoom-in";
-      img.addEventListener("click", () => openPreview(index));
-    });
-  });
-</script>
 
 </body>
 </html>
