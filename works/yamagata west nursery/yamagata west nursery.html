@@ -9,19 +9,34 @@
 <script>
   const translations = {
     ja: {
-      title: "山形市西部保育所",
-      description: "このページは準備中です。"
-    },
-    en: {
-      title: "Yamagata west nursery",
-      description: "This website is currently in preparation."
+      title: "platform",
+    description: `
+八王子市船森公園トイレ設計コンペの応募案<br>
+敷地である公園の至近には、かつての京王線の終着駅である東八王子駅があり、現在の公園に対して斜めに線路が入り込んでいました。<br>
+その線路跡を踏襲するように、京王八王子駅方面から公園中央に向かって斜めに伸びるバブリックスペースを計画しました。<br>
+このパブリックスペースは駅から公園を繋ぐゲートとしての機能の他、ベンチによる滞留、情報発信のサイネージを計画し、賑わいと交流を促進しながら、かつての歴史が想起される場所として計画しました。<br>
+弓型の平面形状により小さな庭をつくり、内部から庭にある木々の緑を感じながらトイレを利用することができます。<br>
+RCシェル構造の屋根は2つのトイレのボックスにそっと乗るように配置され、船の帆のような象徴的な形状が公園のアイコンとなります。<br>
+`
+  },
+  en: {
+      title: "platform",
+      description: `
+Proposal for the Hachioji Funamori Park Toilet Design Competition<br>
+Near the site, Funamori Park, once stood Higashi-Hachioji Station, the former terminal of the Keio Line. The railway tracks once cut diagonally into the park.<br>
+Following this historical trace, our plan introduces a public space extending diagonally from Keio-Hachioji Station toward the center of the park.<br>
+This public space functions not only as a gateway linking the station and the park, but also as a place for rest with benches and for communication through digital signage.<br>
+It is designed to encourage liveliness and interaction while recalling the site’s historical memory.<br>
+The arc-shaped floor plan creates small gardens, allowing users to feel the greenery of the trees while using the facility.<br>
+A reinforced-concrete shell roof gently rests on the two toilet volumes. Its sail-like iconic form becomes a symbolic landmark for the park.<br>
+`
     }
   };
   function setLanguage(lang) {
     localStorage.setItem("lang", lang);
     for (const key in translations[lang]) {
       const el = document.getElementById(key);
-      if (el) el.textContent = translations[lang][key];
+      if (el) el.innerHTML = translations[lang][key];
     }
   }
   window.addEventListener("DOMContentLoaded", () => {
@@ -29,56 +44,6 @@
     setLanguage(lang);
   });
 </script>
-
-
-<style>
-#preview {
-  position: fixed;
-  top: 0; left: 0;
-  width: 100vw; height: 100vh;
-  background-color: rgba(0, 0, 0, 0.85);
-  display: none;
-  justify-content: center;
-  align-items: center;
-  z-index: 9999;
-}
-
-#preview.active {
-  display: flex;
-}
-
-.preview-container {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-  max-width: 90vw;
-  max-height: 90vh;
-}
-
-#preview-img {
-  width: 600px; height: auto;
-  
-  object-fit: contain;
-  border-radius: 6px;
-  box-shadow: 0 0 10px rgba(255,255,255,0.3);
-}
-
-.nav-button {
-  font-size: 24px;
-  padding: 10px 15px;
-  background: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-@media (max-width: 640px) {
-  #preview-img {
-    width: 90vw !important;
-  }
-}
-
-</style>
 
 </head>
 <body>
@@ -102,68 +67,22 @@
     <h1 id="title">作品 1</h1>
     <p id="description">これは作品 1 の説明文です。</p>
     <div class="image-gallery">
-<a href="#"><img src="img1.jpg" alt="img1"></a>
-<a href="#"><img src="img2.jpg" alt="img2"></a>
-<a href="#"><img src="img3.jpg" alt="img3"></a>
-<a href="#"><img src="img4.jpg" alt="img4"></a>
-<a href="#"><img src="img5.jpg" alt="img5"></a>
-<a href="#"><img src="img6.jpg" alt="img6"></a>
-<a href="#"><img src="img7.jpg" alt="img7"></a>
-<a href="#"><img src="img8.jpg" alt="img8"></a>
-<a href="#"><img src="img9.jpg" alt="img9"></a>
-<a href="#"><img src="img10.jpg" alt="img10"></a>
-<a href="#"><img src="img11.jpg" alt="img11"></a>
-<a href="#"><img src="img12.jpg" alt="img12"></a>
-<a href="#"><img src="img13.jpg" alt="img13"></a>
-<a href="#"><img src="img14.jpg" alt="img14"></a>
-<a href="#"><img src="img15.jpg" alt="img15"></a>
+<img src="img1.jpg" alt="img1">
+<img src="img2.jpg" alt="img2">
+<img src="img3.jpg" alt="img3">
+<img src="img4.jpg" alt="img4">
+<img src="img5.jpg" alt="img5">
+<img src="img6.jpg" alt="img6">
+<img src="img7.jpg" alt="img7">
+<img src="img8.jpg" alt="img8">
     </div>
   </main>
   <footer>
-  建築設計事務所 トイノバ<br>
-  一級建築士事務所　東京都知事登録第66718号<br>
+  一級建築士事務所 トイノバ<br/>
+  東京都知事登録第66718号<br/>
   107-0061 東京都港区北青山1-3-1 3F<br>
-  050-7116-3640 / contact@toinova.com
+  070-9163-2318 / contact@toinova.com
   </footer>
-
-<div id="preview" onclick="closePreview(event)">
-  <div class="preview-container" onclick="event.stopPropagation();">
-    <button class="nav-button" onclick="changeImage(-1)">←</button>
-    <img id="preview-img" src="" alt="Preview Image">
-    <button class="nav-button" onclick="changeImage(1)">→</button>
-  </div>
-</div>
-
-<script>
-  let currentIndex = 0;
-  let galleryImages = [];
-
-  function openPreview(index) {
-    currentIndex = index;
-    const preview = document.getElementById("preview");
-    const img = document.getElementById("preview-img");
-    img.src = galleryImages[currentIndex].src;
-    preview.classList.add("active");
-  }
-
-  function closePreview(event) {
-    const preview = document.getElementById("preview");
-    preview.classList.remove("active");
-  }
-
-  function changeImage(direction) {
-    currentIndex = (currentIndex + direction + galleryImages.length) % galleryImages.length;
-    document.getElementById("preview-img").src = galleryImages[currentIndex].src;
-  }
-
-  window.addEventListener("DOMContentLoaded", () => {
-    galleryImages = Array.from(document.querySelectorAll('.image-gallery img'));
-    galleryImages.forEach((img, index) => {
-      img.style.cursor = "zoom-in";
-      img.addEventListener("click", () => openPreview(index));
-    });
-  });
-</script>
 
 </body>
 </html>
