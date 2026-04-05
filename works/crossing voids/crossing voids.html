@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>toinova</title>
+  <link rel="stylesheet" href="../../style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+<script>
+  const translations = {
+    ja: {
+      title: "山形市西部保育所",
+    description: `
+山形県山形市の保育園の計画。<br>
+100人の園児が生き生きと過ごすことができ、職員が気持ちよく働ける保育園となるよう計画しました。<br>
+安全・安心で過ごせる保育環境や、思い切り体を動かせる遊びの環境、インクルーシブ保育の提供機能、清潔な衛生環境を整備しています。<br>
+さらに「こどもまんなか相談室」として、発達相談や児童発達支援、民間保育施設等への支援、地域の子育て家庭への相談支援機能を持たせ、地域社会全体の子育てを支えます。<br>
+周辺への日照、音、渋滞防止、交通安全などに配慮しつつ、住宅地のスケールに馴染み、住民からも愛される保育園としました。<br>
+<br>
+`
+  },
+  en: {
+      title: "Yamagata west nursery",
+      description: `
+A nursery school project located in Yamagata City, Yamagata Prefecture.<br>
+We designed the facility to provide a vibrant environment where 100 children can thrive and the staff can work comfortably.<br>
+It is equipped with a safe and secure childcare environment, dynamic play areas for active physical movement, inclusive childcare capabilities, and a clean, hygienic environment.<br>
+Furthermore, it features a "Child-Centered Consultation Room" that provides developmental consultations and support, assistance for private childcare facilities, and counseling services for local families, thereby supporting child-rearing across the entire community.<br>
+While giving careful consideration to the surrounding environment—including sunlight, noise mitigation, traffic congestion prevention, and traffic safety—the nursery school is designed to blend harmoniously with the scale of the residential neighborhood and become a beloved community asset.<br>
+<br>
+`
+    }
+  };
+  function setLanguage(lang) {
+    localStorage.setItem("lang", lang);
+    for (const key in translations[lang]) {
+      const el = document.getElementById(key);
+      if (el) el.innerHTML = translations[lang][key];
+    }
+  }
+  window.addEventListener("DOMContentLoaded", () => {
+    const lang = localStorage.getItem("lang") || "ja";
+    setLanguage(lang);
+  });
+</script>
+
+</head>
+<body>
+  
+<header>
+  <div class="logo">
+    <a href="../../index.html"><img src="../../logo.png" alt="Toinova Logo"></a>
+  </div>
+  <nav>
+    <a href="../../index.html">works</a>
+    <a href="../../about/about.html">about</a>
+    <a href="../../contact/contact.html">contact</a>
+    <div class="language-toggle">
+      <span onclick="setLanguage('ja')">日本語</span> /
+      <span onclick="setLanguage('en')">English</span>
+    </div>
+  </nav>
+</header>
+
+  <main class="project-description">
+    <h1 id="title">作品 1</h1>
+    <p id="description">これは作品 1 の説明文です。</p>
+    <div class="image-gallery">
+<img src="img1.jpg" alt="img1">
+<img src="img2.jpg" alt="img2">
+<img src="img3.jpg" alt="img3">
+<img src="img4.jpg" alt="img4">
+<img src="img5.jpg" alt="img5">
+<img src="img6.jpg" alt="img6">
+<img src="img7.jpg" alt="img7">
+<img src="img8.jpg" alt="img8">
+<img src="img9.jpg" alt="img9">
+<img src="img10.jpg" alt="img10">
+<img src="img11.jpg" alt="img11">
+<img src="img12.jpg" alt="img12">
+<img src="img13.jpg" alt="img13">
+<img src="img14.jpg" alt="img14">
+<img src="img15.jpg" alt="img15">
+<img src="img16.jpg" alt="img16">
+    </div>
+  </main>
+  <footer>
+  合同会社一級建築士事務所 トイノバ<br/>
+  東京都知事登録第67120号<br/>
+  107-0061 東京都港区北青山1-3-1 3F<br>
+  070-9163-2318 / contact@toinova.com
+  </footer>
+
+</body>
+</html>
