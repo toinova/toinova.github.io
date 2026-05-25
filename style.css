@@ -11,26 +11,6 @@ footer {
   height: auto;
 }
 
-@media (max-width: 768px) {
-  .image-gallery {
-    column-count: 1 !important; /* 1列で表示 */
-    column-gap: 0 !important;
-  }
-
-  .image-gallery a {
-    display: block;
-    width: 100%;
-    margin-bottom: 16px;
-  }
-
-.image-gallery img,
-  .image-gallery video {
-    width: 100%;
-    height: auto;
-  }
-}
-
-
 /* ヘッダー構成：左上ロゴ／右上リンク＋言語切替 */
 header {
   display: flex;
@@ -70,40 +50,47 @@ nav a {
   text-decoration: underline;
 }
 
-/* 画像ギャラリースタイル（メーソンリー風） */
+/* 画像ギャラリースタイル（JS メーソンリーで左→右配置） */
 
 .image-gallery {
-  column-count: 3;
-  column-gap: 16px;
+  position: relative;
   padding: 20px;
 }
 
 .image-gallery img,
 .image-gallery video {
   width: 100%;
-  margin-bottom: 16px;
   cursor: default;
   display: block;
   border: 1px solid #ccc;
   border-radius: 4px;
 }
 
+.image-gallery > a,
+.image-gallery > .image-container,
+.image-gallery > img,
+.image-gallery > video,
+.image-gallery > .gallery-item {
+  display: block;
+  box-sizing: border-box; /* border 込みで width を計算（直挿し img の 1px border ぶんが outerWidth を膨らませて Masonry が列数を落とすのを防ぐ） */
+  /* 100% は padding box 基準（absolute子要素）なので、ギャラリーの両側 padding と 2 本のガター幅を引いて content box にぴったり収める */
+  width: calc((100% - var(--space-block, 10px) * 2 - var(--gallery-gap, 8px) * 2) / 3);
+  margin: 0 0 8px;
+}
+
 @media (max-width: 768px) {
-  .image-gallery {
-    column-count: 1 !important; /* 1列で表示 */
-    column-gap: 0 !important;
-  }
-
-  .image-gallery a {
-    display: block;
-    width: 100%;
-    margin-bottom: 16px;
-  }
-
-.image-gallery img,
+  .image-gallery img,
   .image-gallery video {
-    width: 100%;
     height: auto;
+  }
+
+  .image-gallery > a,
+  .image-gallery > .image-container,
+  .image-gallery > img,
+  .image-gallery > video,
+  .image-gallery > .gallery-item {
+    width: 100% !important;
+    margin-bottom: 6px;
   }
 }
 
@@ -243,11 +230,13 @@ header{
 
 /* 本文と写真（ギャラリー）の間隔／ギャラリー内の隙間を詰める */
 .image-gallery{
-  column-gap: var(--gallery-gap) !important;
   padding: var(--space-block) !important;
 }
-.image-gallery img,
-.image-gallery video {
+.image-gallery > a,
+.image-gallery > .image-container,
+.image-gallery > img,
+.image-gallery > video,
+.image-gallery > .gallery-item {
   margin-bottom: var(--gallery-gap) !important;
 }
 
