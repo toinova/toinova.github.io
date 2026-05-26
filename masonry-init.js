@@ -20,11 +20,40 @@
     });
     gallery._masonry = masonry;
 
-    imagesLoaded(gallery, function () {
-      masonry.layout();
-    }).on('progress', function () {
-      masonry.layout();
+    // Re-layout on any pending layout request (debounced via rAF to coalesce bursts)
+    var rafId = null;
+    function scheduleLayout() {
+      if (rafId !== null) return;
+      rafId = requestAnimationFrame(function () {
+        rafId = null;
+        masonry.layout();
+      });
+    }
+
+    // Images
+    imagesLoaded(gallery, scheduleLayout).on('progress', scheduleLayout);
+
+    // Videos: imagesLoaded does not handle <video>. Listen for metadata/data ready
+    // so the gallery reflows once the actual video dimensions are known.
+    var videos = gallery.querySelectorAll('video');
+    Array.prototype.forEach.call(videos, function (video) {
+      // If metadata already available
+      if (video.readyState >= 1) {
+        scheduleLayout();
+      }
+      video.addEventListener('loadedmetadata', scheduleLayout);
+      video.addEventListener('loadeddata', scheduleLayout);
+      video.addEventListener('canplay', scheduleLayout);
     });
+
+    // ResizeObserver catches any other late-changing item size (lazy media, font swap, etc.)
+    if (typeof ResizeObserver !== 'undefined') {
+      var ro = new ResizeObserver(scheduleLayout);
+      Array.prototype.forEach.call(gallery.children, function (child) {
+        ro.observe(child);
+      });
+      gallery._masonryRO = ro;
+    }
   }
 
   function reflowAll() {
