@@ -204,6 +204,33 @@ html, body {
   text-transform: uppercase;
 }
 
+/* Page: Cover（ロゴだけのシンプルな表紙） */
+.page--cover-sheet {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 11mm 18mm;
+}
+.cover-mark {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 22mm;
+}
+.cover-mark .logo-large {
+  width: 210mm;
+  height: auto;
+  display: block;
+}
+.cover-mark .tagline {
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  font-size: 9pt;
+  letter-spacing: 0.5em;
+  color: #888;
+  text-transform: uppercase;
+  text-indent: 0.5em;
+}
+
 /* Page: About（事務所紹介・3カラム） */
 .page--about .body {
   display: grid;
