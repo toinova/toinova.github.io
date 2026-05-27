@@ -215,18 +215,18 @@ html, body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 22mm;
+  gap: 14mm;
 }
 .cover-mark .logo-large {
-  width: 210mm;
+  width: 80mm;
   height: auto;
   display: block;
 }
 .cover-mark .tagline {
   font-family: 'Helvetica Neue', Arial, sans-serif;
-  font-size: 9pt;
+  font-size: 7.5pt;
   letter-spacing: 0.5em;
-  color: #888;
+  color: #999;
   text-transform: uppercase;
   text-indent: 0.5em;
 }
