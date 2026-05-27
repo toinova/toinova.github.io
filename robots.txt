@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+
+# legacy/draft directories
+Disallow: /about/old/
+
+Sitemap: https://toinova.com/sitemap.xml
