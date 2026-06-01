@@ -1,0 +1,394 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500&family=Noto+Serif+JP:wght@400;500;700&display=swap');
+
+@page {
+  size: A4 portrait;
+  margin: 0;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  font-family: 'Noto Sans JP', "Yu Gothic", "Hiragino Sans", sans-serif;
+  color: #1a1a1a;
+  background: #fff;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+
+.page {
+  width: 210mm;
+  height: 297mm;
+  padding: 13mm 15mm 11mm;
+  page-break-after: always;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  overflow: hidden;
+}
+.page:last-child { page-break-after: auto; }
+
+/* ---------- Header ---------- */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  font-size: 6.8pt;
+  letter-spacing: 0.18em;
+  color: #888;
+  padding-bottom: 3.5mm;
+  border-bottom: 0.4pt solid #d8d8d8;
+  flex-shrink: 0;
+}
+.header .brand-logo {
+  height: 7mm;
+  width: auto;
+  display: block;
+}
+.header .meta {
+  text-transform: uppercase;
+  font-feature-settings: "tnum" 1;
+}
+
+/* ---------- Body ---------- */
+.body {
+  flex: 1;
+  margin: 6mm 0;
+  min-height: 0;
+}
+
+/* ---------- Footer ---------- */
+.footer {
+  font-size: 6.2pt;
+  letter-spacing: 0.12em;
+  color: #999;
+  padding-top: 3mm;
+  border-top: 0.4pt solid #d8d8d8;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  flex-shrink: 0;
+}
+.footer .firm {
+  letter-spacing: 0.16em;
+  color: #1a1a1a;
+  font-weight: 500;
+}
+.footer .pagenum {
+  font-feature-settings: "tnum" 1;
+  letter-spacing: 0.25em;
+}
+
+/* ============================================================
+   COVER (page 01)
+   ============================================================ */
+.page--cover-sheet {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 24mm 18mm;
+}
+.cover-mark {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12mm;
+}
+.cover-mark .logo-large {
+  width: 72mm;
+  height: auto;
+  display: block;
+}
+.cover-mark .tagline {
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  font-size: 8pt;
+  letter-spacing: 0.5em;
+  color: #999;
+  text-transform: uppercase;
+  text-indent: 0.5em;
+}
+.cover-foot {
+  flex-shrink: 0;
+  text-align: center;
+  line-height: 1.7;
+}
+.cover-foot .firm-ja {
+  font-size: 8pt;
+  letter-spacing: 0.18em;
+  color: #444;
+}
+.cover-foot .firm-en {
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  font-size: 6.5pt;
+  letter-spacing: 0.35em;
+  color: #aaa;
+  text-transform: uppercase;
+  margin-top: 1.5mm;
+}
+
+/* ============================================================
+   ABOUT (page 02)
+   ============================================================ */
+.page--about .body {
+  display: flex;
+  flex-direction: column;
+}
+.about-lead { flex-shrink: 0; }
+.about-title {
+  font-family: 'Noto Serif JP', "Yu Mincho", serif;
+  font-weight: 500;
+  font-size: 17pt;
+  line-height: 1.2;
+  letter-spacing: 0.02em;
+  margin-bottom: 1.5mm;
+}
+.about-subtitle {
+  font-size: 7.5pt;
+  color: #888;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  margin-bottom: 4mm;
+}
+.mission-ja {
+  font-size: 7.6pt;
+  line-height: 1.75;
+  color: #2a2a2a;
+}
+.mission-ja p { margin-bottom: 0.4em; }
+.mission-en {
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  font-size: 6.3pt;
+  line-height: 1.5;
+  color: #777;
+  margin-top: 2.5mm;
+  padding-top: 2.5mm;
+  border-top: 0.3pt solid #ddd;
+}
+.mission-en p { margin-bottom: 0.4em; }
+
+.name-origin-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  margin: 4mm 0;
+}
+
+.about-cols {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 0.82fr 1fr;
+  gap: 8mm;
+  min-height: 0;
+  margin-top: 1mm;
+}
+.about-col {
+  display: flex;
+  flex-direction: column;
+  gap: 5mm;
+  min-width: 0;
+}
+.about-section { display: flex; flex-direction: column; }
+.about-h2 {
+  font-family: 'Noto Sans JP', "Yu Gothic", sans-serif;
+  font-size: 6.8pt;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #888;
+  margin-bottom: 2.5mm;
+  padding-bottom: 1.2mm;
+  border-bottom: 0.4pt solid #ccc;
+}
+.about-photo {
+  width: 48%;
+  height: auto;
+  display: block;
+  background: #f0f0f0;
+}
+.about-name {
+  font-family: 'Noto Serif JP', "Yu Mincho", serif;
+  font-size: 11pt;
+  font-weight: 500;
+  margin-top: 2.5mm;
+  line-height: 1.3;
+}
+.about-name .en {
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  font-size: 8pt;
+  color: #666;
+  font-weight: 400;
+  display: block;
+  letter-spacing: 0.05em;
+  margin-top: 0.8mm;
+}
+.about-license {
+  font-size: 7pt;
+  color: #666;
+  margin-top: 0.8mm;
+  letter-spacing: 0.05em;
+}
+.career-list {
+  font-size: 6.8pt;
+  line-height: 1.6;
+  margin-top: 3mm;
+}
+.career-list dl {
+  display: grid;
+  grid-template-columns: 16mm 1fr;
+  row-gap: 1.2mm;
+  column-gap: 2.5mm;
+}
+.career-list dt {
+  color: #888;
+  font-feature-settings: "tnum" 1;
+  letter-spacing: 0.03em;
+}
+.career-list dd { color: #1a1a1a; }
+.career-list dd .small {
+  display: block;
+  font-size: 6pt;
+  color: #888;
+  margin-top: 0.3mm;
+}
+.about-body-text {
+  font-size: 7.2pt;
+  line-height: 1.65;
+  color: #2a2a2a;
+}
+.about-body-text p { margin-bottom: 0.5em; }
+.about-body-text .en {
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  font-size: 6pt;
+  line-height: 1.45;
+  color: #777;
+  margin-top: 1.5mm;
+  display: block;
+}
+.project-list {
+  list-style: none;
+  padding-left: 0;
+  font-size: 6.8pt;
+  line-height: 1.5;
+}
+.project-list li {
+  padding-left: 3.5mm;
+  position: relative;
+  margin-bottom: 1.2mm;
+  color: #2a2a2a;
+}
+.project-list li::before {
+  content: '·';
+  position: absolute;
+  left: 0;
+  color: #888;
+  font-weight: 700;
+}
+.project-list li .scale { color: #888; font-size: 6pt; }
+
+/* ============================================================
+   WORK — LEFT page (hero + concept)
+   ============================================================ */
+.page--work .body {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+.work-hero {
+  flex: 1 1 auto;
+  min-height: 55mm;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  margin-bottom: 6mm;
+}
+.work-hero img {
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  display: block;
+}
+.work-text { flex: 0 0 auto; }
+.project-num {
+  font-size: 7pt;
+  letter-spacing: 0.3em;
+  color: #999;
+  margin-bottom: 3mm;
+  text-transform: uppercase;
+}
+.title {
+  font-family: 'Noto Serif JP', "Yu Mincho", "Hiragino Mincho Pro", serif;
+  font-weight: 500;
+  font-size: 19pt;
+  line-height: 1.2;
+  margin-bottom: 2mm;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+}
+.subtitle {
+  font-size: 8pt;
+  color: #888;
+  letter-spacing: 0.12em;
+  margin-bottom: 4mm;
+  font-weight: 400;
+}
+.facts {
+  display: grid;
+  grid-template-columns: 20mm 1fr;
+  gap: 1.5mm 4mm;
+  font-size: 7.2pt;
+  line-height: 1.5;
+  margin-bottom: 4mm;
+  color: #444;
+}
+.facts dt {
+  color: #999;
+  letter-spacing: 0.12em;
+  font-weight: 400;
+  text-transform: uppercase;
+}
+.facts dd { color: #1a1a1a; }
+
+.description { display: grid; grid-template-columns: 1fr 1fr; gap: 6mm; }
+.description .ja {
+  font-size: 7.6pt;
+  line-height: 1.75;
+  font-weight: 300;
+  color: #2a2a2a;
+}
+.description .ja p { margin-bottom: 0.45em; }
+.description .ja p:last-child { margin-bottom: 0; }
+.description .en {
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  font-size: 6.3pt;
+  line-height: 1.5;
+  color: #777;
+  font-weight: 300;
+  letter-spacing: 0.01em;
+}
+.description .en p { margin-bottom: 0.45em; }
+.description .en p:last-child { margin-bottom: 0; }
+
+/* ============================================================
+   WORK — RIGHT page (Justified Gallery)
+   ============================================================ */
+.page--grid .body {
+  position: relative;
+  overflow: hidden;
+}
+.grid-item {
+  position: absolute;
+  background: #fff;
+  margin: 0;
+}
+.grid-item img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: fill;
+}
