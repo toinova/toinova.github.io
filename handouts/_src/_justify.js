@@ -1,126 +1,119 @@
 /*
- * Justified Gallery layout.
- * 各 .page--grid .body の中身（.grid-item）を画像のアスペクト比に応じて行に詰め、
- * 各行を body 幅にぴったり合わせて高さを揃える。トリミングなし。
+ * Justified Gallery layout（高さ充填・均等分割版）.
+ * 各 .page--grid .body の .grid-item を、画像のアスペクト比を保ったまま（トリミングなし）
+ * 行に分割し、各行を body 幅にぴったり揃える。
  *
- * 行高ターゲットを 1px 刻みで線形探索し、body 高さに収まる最大値を採用する。
- * 最終行は他行との比で扱いを変える：
- *   - stretchedH ≤ prevH * 1.5  → そのまま伸長（行内は隙間ゼロ）
- *   - stretchedH > prevH * 1.5  → prevH に揃えてレターボックス（右側に余白）
+ * 行数 R を 1..N で変え、各 R について「行ごとのアスペクト比合計が均等になる連続分割」を
+ * DP（分散最小）で求める。行を増やすほど各画像は大きくなり総高さも増えるため、
+ * body 高さに収まる範囲で総高さが最大になる R を採用する＝余白を最小化し画像を最大化。
+ * どの R でも収まらない場合は、最も収まりに近い R を等倍縮小して収める。
  */
 (function () {
   var GAP = 11; // px ≒ 3mm
 
-  function sumAspects(row, aspects) {
+  function sumRow(row, aspects) {
     var s = 0;
     for (var i = 0; i < row.length; i++) s += aspects[row[i]];
     return s;
   }
 
-  function packRows(aspects, containerW, targetH, gap) {
-    var rows = [];
-    var i = 0;
-    while (i < aspects.length) {
-      var row = [i];
-      var asum = aspects[i];
-      i++;
-      while (i < aspects.length) {
-        var newSum = asum + aspects[i];
-        var newCount = row.length + 1;
-        var fillW = newSum * targetH + (newCount - 1) * gap;
-        var prevW = asum * targetH + (row.length - 1) * gap;
-        if (Math.abs(fillW - containerW) < Math.abs(prevW - containerW)) {
-          asum = newSum;
-          row.push(i);
-          i++;
-          if (fillW >= containerW) break;
-        } else {
-          break;
+  // 連続分割で各行のアスペクト比合計を均等化（分散最小）する DP。
+  // 行内画像数は固定幅に対して justified されるため、合計が揃う＝行高が揃う。
+  function balancedPartition(aspects, R) {
+    var n = aspects.length;
+    var pre = [0];
+    for (var i = 0; i < n; i++) pre.push(pre[i] + aspects[i]);
+    var ideal = pre[n] / R;
+    var INF = Infinity;
+    var dp = [], back = [];
+    for (var i = 0; i <= n; i++) {
+      dp.push(new Array(R + 1).fill(INF));
+      back.push(new Array(R + 1).fill(-1));
+    }
+    dp[0][0] = 0;
+    for (var i = 1; i <= n; i++) {
+      var rmax = Math.min(i, R);
+      for (var r = 1; r <= rmax; r++) {
+        for (var j = r - 1; j < i; j++) {
+          if (dp[j][r - 1] === INF) continue;
+          var s = pre[i] - pre[j];
+          var d = s - ideal;
+          var cost = dp[j][r - 1] + d * d;
+          if (cost < dp[i][r]) { dp[i][r] = cost; back[i][r] = j; }
         }
       }
-      rows.push(row);
+    }
+    var rows = [];
+    var ii = n, rr = R;
+    while (rr > 0) {
+      var j = back[ii][rr];
+      var row = [];
+      for (var k = j; k < ii; k++) row.push(k);
+      rows.unshift(row);
+      ii = j; rr--;
     }
     return rows;
   }
 
-  function rowHeights(rows, aspects, containerW, gap) {
-    // 非最終行は stretchedH（行幅を container にぴったり）
-    var heights = rows.map(function (row, ri) {
-      var asum = sumAspects(row, aspects);
-      return (containerW - (row.length - 1) * gap) / asum;
+  function rowHeightsFor(rows, aspects, containerW) {
+    return rows.map(function (row) {
+      var s = sumRow(row, aspects);
+      return (containerW - (row.length - 1) * GAP) / s;
     });
-    // 最終行のみ補正
-    if (rows.length > 1) {
-      var last = rows[rows.length - 1];
-      var lastAsum = sumAspects(last, aspects);
-      var lastStretched = (containerW - (last.length - 1) * gap) / lastAsum;
-      var prevH = heights[rows.length - 2];
-      if (lastStretched > prevH * 1.5) {
-        // 最終行が前行の 1.5 倍を超える → 前行高さに揃えてレターボックス（右に余白）
-        heights[rows.length - 1] = prevH;
-      } else {
-        // それ以外はそのまま伸長
-        heights[rows.length - 1] = lastStretched;
-      }
-    }
-    return heights;
   }
 
-  function totalHeight(rows, aspects, containerW, gap) {
-    var hs = rowHeights(rows, aspects, containerW, gap);
+  function totalOf(heights, rowCount) {
     var t = 0;
-    for (var i = 0; i < hs.length; i++) t += hs[i];
-    t += (rows.length - 1) * gap;
-    return t;
+    for (var i = 0; i < heights.length; i++) t += heights[i];
+    return t + (rowCount - 1) * GAP;
   }
 
   function applyLayout(body, items, aspects) {
     var containerW = body.clientWidth;
     var containerH = body.clientHeight;
+    var n = items.length;
 
-    // 線形探索：body に収まる範囲で「画像面積（= containerW × 行高合計）」が最大になるレイアウトを採用
-    var bestTotal = 0;
-    var bestRows = null;
-    for (var h = 50; h <= 700; h += 1) {
-      var rows = packRows(aspects, containerW, h, GAP);
-      // 1要素だけの行は見た目が悪いので、複数行ある時は単独行を含むレイアウトを除外
-      var hasSingleton = false;
-      if (rows.length > 1) {
-        for (var ri = 0; ri < rows.length; ri++) {
-          if (rows[ri].length === 1) { hasSingleton = true; break; }
-        }
-      }
-      if (hasSingleton) continue;
-      var total = totalHeight(rows, aspects, containerW, GAP);
-      if (total <= containerH && total > bestTotal) {
-        bestTotal = total;
-        bestRows = rows;
+    var best = null;      // 収まる中で総高さ最大
+    var fallback = null;  // どれも収まらない場合の最小オーバーフロー
+    for (var R = 1; R <= n; R++) {
+      var rows = balancedPartition(aspects, R);
+      var hs = rowHeightsFor(rows, aspects, containerW);
+      var total = totalOf(hs, R);
+      if (total <= containerH) {
+        if (!best || total > best.total) best = { rows: rows, hs: hs, total: total };
+      } else {
+        if (!fallback || total < fallback.total) fallback = { rows: rows, hs: hs, total: total };
       }
     }
-    if (!bestRows) {
-      // フォールバック：最小ターゲットで詰める
-      bestRows = packRows(aspects, containerW, 50, GAP);
+    if (!best) {
+      // R=1 でも収まらない（極端に縦長な画像群）→ 等倍縮小して収める
+      var scale = containerH / fallback.total;
+      best = {
+        rows: fallback.rows,
+        hs: fallback.hs.map(function (h) { return h * scale; }),
+        total: containerH
+      };
     }
 
-    var heights = rowHeights(bestRows, aspects, containerW, GAP);
-    // まず top=0 から積み上げて合計高さを算出
+    var heights = best.hs;
+    var layoutRows = best.rows;
     var rowYs = [];
     var y = 0;
-    heights.forEach(function (h, ri) {
-      rowYs.push(y);
-      y += h + GAP;
-    });
-    var totalContentH = y - (heights.length > 0 ? GAP : 0); // 最後の GAP を除く
-    // body 高さからのスラックを上下均等に振り分けるためのオフセット
+    heights.forEach(function (h) { rowYs.push(y); y += h + GAP; });
+    var totalContentH = y - (heights.length > 0 ? GAP : 0);
     var yOffset = Math.max(0, (containerH - totalContentH) / 2);
 
-    bestRows.forEach(function (row, ri) {
+    layoutRows.forEach(function (row, ri) {
       var actualH = heights[ri];
+      // 等倍縮小時は行幅が containerW 未満になり得るため水平方向も中央寄せ
+      var rowW = (row.length - 1) * GAP;
+      row.forEach(function (idx) { rowW += aspects[idx] * actualH; });
+      var xOffset = Math.max(0, (containerW - rowW) / 2);
       var x = 0;
-      row.forEach(function (i) {
-        var w = aspects[i] * actualH;
-        var item = items[i];
-        item.style.left = x + 'px';
+      row.forEach(function (idx) {
+        var w = aspects[idx] * actualH;
+        var item = items[idx];
+        item.style.left = (x + xOffset) + 'px';
         item.style.top = (rowYs[ri] + yOffset) + 'px';
         item.style.width = w + 'px';
         item.style.height = actualH + 'px';
