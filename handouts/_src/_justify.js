@@ -68,11 +68,11 @@
     return t + (rowCount - 1) * GAP;
   }
 
-  function applyLayout(body, items, aspects) {
-    var containerW = body.clientWidth;
-    var containerH = body.clientHeight;
-    var n = items.length;
-
+  // アスペクト比配列を containerW × containerH に充填する最良レイアウト
+  // （収まる範囲で総高さ最大の R を採用。どれも収まらなければ等倍縮小）を返す。
+  function chooseFill(aspects, containerW, containerH) {
+    var n = aspects.length;
+    if (n === 0) return { rows: [], hs: [] };
     var best = null;      // 収まる中で総高さ最大
     var fallback = null;  // どれも収まらない場合の最小オーバーフロー
     for (var R = 1; R <= n; R++) {
@@ -86,33 +86,57 @@
       }
     }
     if (!best) {
-      // R=1 でも収まらない（極端に縦長な画像群）→ 等倍縮小して収める
       var scale = containerH / fallback.total;
-      best = {
-        rows: fallback.rows,
-        hs: fallback.hs.map(function (h) { return h * scale; }),
-        total: containerH
-      };
+      best = { rows: fallback.rows, hs: fallback.hs.map(function (h) { return h * scale; }), total: containerH };
     }
+    return best;
+  }
 
-    var heights = best.hs;
-    var layoutRows = best.rows;
+  function applyLayout(body, items, aspects) {
+    var containerW = body.clientWidth;
+    var containerH = body.clientHeight;
+
+    // data-maxh（px）を持つ要素は通常の充填フローから外し、最下段に小さく配置する。
+    // （例：daylight house の「before」写真を大きく扱わないようにするため）
+    var flow = [];      // フロー対象の items インデックス
+    var capped = [];    // { i, maxh, h }
+    items.forEach(function (item, i) {
+      var mh = parseFloat(item.getAttribute('data-maxh'));
+      if (!isNaN(mh) && mh > 0) capped.push({ i: i, maxh: mh });
+      else flow.push(i);
+    });
+
+    // 最下段（capped）の高さ＝各要素を maxh に制限した最大値
+    var cappedRowH = 0;
+    capped.forEach(function (c) {
+      c.h = Math.min(c.maxh, containerW / aspects[c.i]);
+      if (c.h > cappedRowH) cappedRowH = c.h;
+    });
+    var reserved = capped.length ? (cappedRowH + GAP) : 0;
+    var availH = Math.max(1, containerH - reserved);
+
+    // フロー画像を availH に充填
+    var aspF = flow.map(function (idx) { return aspects[idx]; });
+    var layout = chooseFill(aspF, containerW, availH);
+    var heights = layout.hs;
+    var layoutRows = layout.rows;
+
     var rowYs = [];
     var y = 0;
     heights.forEach(function (h) { rowYs.push(y); y += h + GAP; });
     var totalContentH = y - (heights.length > 0 ? GAP : 0);
-    var yOffset = Math.max(0, (containerH - totalContentH) / 2);
+    var yOffset = Math.max(0, (availH - totalContentH) / 2);
 
     layoutRows.forEach(function (row, ri) {
       var actualH = heights[ri];
       // 等倍縮小時は行幅が containerW 未満になり得るため水平方向も中央寄せ
       var rowW = (row.length - 1) * GAP;
-      row.forEach(function (idx) { rowW += aspects[idx] * actualH; });
+      row.forEach(function (li) { rowW += aspF[li] * actualH; });
       var xOffset = Math.max(0, (containerW - rowW) / 2);
       var x = 0;
-      row.forEach(function (idx) {
-        var w = aspects[idx] * actualH;
-        var item = items[idx];
+      row.forEach(function (li) {
+        var w = aspF[li] * actualH;
+        var item = items[flow[li]];
         item.style.left = (x + xOffset) + 'px';
         item.style.top = (rowYs[ri] + yOffset) + 'px';
         item.style.width = w + 'px';
@@ -120,6 +144,22 @@
         x += w + GAP;
       });
     });
+
+    // capped 行：最下段に右寄せ・下端揃えで配置
+    if (capped.length) {
+      var totalCapW = (capped.length - 1) * GAP;
+      capped.forEach(function (c) { totalCapW += aspects[c.i] * c.h; });
+      var cx = Math.max(0, containerW - totalCapW);
+      capped.forEach(function (c) {
+        var w = aspects[c.i] * c.h;
+        var item = items[c.i];
+        item.style.left = cx + 'px';
+        item.style.top = (containerH - c.h) + 'px';
+        item.style.width = w + 'px';
+        item.style.height = c.h + 'px';
+        cx += w + GAP;
+      });
+    }
   }
 
   function processBody(body) {

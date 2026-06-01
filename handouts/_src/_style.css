@@ -204,6 +204,22 @@ html, body {
   text-transform: uppercase;
 }
 
+/* 画像右下のシンプルなラベル（例：改修前の「before」） */
+.grid-item .before-tag {
+  position: absolute;
+  right: 1.4mm;
+  bottom: 1.4mm;
+  padding: 0.6mm 1.8mm;
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  font-size: 6.5pt;
+  letter-spacing: 0.14em;
+  line-height: 1;
+  color: #fff;
+  background: rgba(0, 0, 0, 0.55);
+  text-transform: lowercase;
+  pointer-events: none;
+}
+
 /* Page: Cover（ロゴだけのシンプルな表紙） */
 .page--cover-sheet {
   display: flex;

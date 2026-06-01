@@ -78,6 +78,28 @@ nav a {
   margin: 0 0 8px;
 }
 
+/* 改修前などのラベルを画像の右下に重ねる */
+.image-gallery .image-container {
+  position: relative;
+}
+.image-gallery .image-container img {
+  width: 100%;
+  margin: 0;
+}
+.image-gallery .before-tag {
+  position: absolute;
+  right: 8px;
+  bottom: 8px;
+  padding: 2px 9px;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  line-height: 1.5;
+  color: #fff;
+  background: rgba(0, 0, 0, 0.55);
+  border-radius: 3px;
+  pointer-events: none;
+}
+
 @media (max-width: 768px) {
   .image-gallery img,
   .image-gallery video {

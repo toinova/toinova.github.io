@@ -392,3 +392,19 @@ html, body {
   display: block;
   object-fit: fill;
 }
+
+/* 画像右下のシンプルなラベル（例：改修前の「before」） */
+.grid-item .before-tag {
+  position: absolute;
+  right: 1.2mm;
+  bottom: 1.2mm;
+  padding: 0.5mm 1.6mm;
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  font-size: 6pt;
+  letter-spacing: 0.14em;
+  line-height: 1;
+  color: #fff;
+  background: rgba(0, 0, 0, 0.55);
+  text-transform: lowercase;
+  pointer-events: none;
+}
