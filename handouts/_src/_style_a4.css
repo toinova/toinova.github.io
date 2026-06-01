@@ -174,10 +174,10 @@ html, body {
 .mission-en p { margin-bottom: 0.4em; }
 
 .name-origin-img {
-  width: 100%;
+  width: 50%;
   height: auto;
   display: block;
-  margin: 4mm 0;
+  margin: 3mm 0;
 }
 
 .about-cols {
