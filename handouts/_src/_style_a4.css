@@ -78,6 +78,10 @@ html, body {
   font-feature-settings: "tnum" 1;
   letter-spacing: 0.25em;
 }
+/* 見開きで左(偶数)ページはフッターを反転し、ページ番号を外側(左)に配置 */
+.page:nth-child(even) .footer {
+  flex-direction: row-reverse;
+}
 
 /* ============================================================
    COVER (page 01)
@@ -266,6 +270,23 @@ html, body {
   color: #777;
   margin-top: 1.5mm;
   display: block;
+}
+.company-info {
+  font-size: 6.4pt;
+  line-height: 1.45;
+}
+.company-info dl {
+  display: grid;
+  grid-template-columns: 17mm 1fr;
+  row-gap: 1mm;
+  column-gap: 2.5mm;
+}
+.company-info dt {
+  color: #888;
+  letter-spacing: 0.04em;
+}
+.company-info dd {
+  color: #1a1a1a;
 }
 .project-list {
   list-style: none;
