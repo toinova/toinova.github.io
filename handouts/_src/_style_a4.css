@@ -429,3 +429,54 @@ html, body {
   text-transform: lowercase;
   pointer-events: none;
 }
+
+/* Page: 中表紙（セクション扉） */
+.page--section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10mm 14mm;
+}
+.section-mark {
+  text-align: center;
+  max-width: 130mm;
+}
+.section-mark .section-label {
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  font-size: 7.5pt;
+  letter-spacing: 0.35em;
+  color: #999;
+  text-transform: uppercase;
+  text-indent: 0.35em;
+}
+.section-mark .section-rule {
+  width: 18mm;
+  height: 0;
+  border-top: 0.3pt solid #ccc;
+  margin: 8mm auto;
+}
+.section-mark .section-title {
+  font-family: 'Noto Serif JP', "Yu Mincho", "Hiragino Mincho Pro", serif;
+  font-weight: 500;
+  font-size: 19pt;
+  letter-spacing: 0.08em;
+  margin-bottom: 4mm;
+}
+.section-mark .section-subtitle {
+  font-size: 9pt;
+  color: #888;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  margin-bottom: 11mm;
+}
+.section-mark .section-note p {
+  font-size: 8pt;
+  line-height: 1.9;
+  color: #555;
+  margin: 0;
+}
+.section-mark .section-note p.en {
+  font-size: 7pt;
+  color: #999;
+  margin-top: 2mm;
+}
