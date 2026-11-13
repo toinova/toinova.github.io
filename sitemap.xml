@@ -3,7 +3,7 @@
 
   <url>
     <loc>https://toinova.com/</loc>
-    <lastmod>2026-08-26</lastmod>
+    <lastmod>2026-11-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
@@ -21,6 +21,12 @@
   </url>
 
   <!-- Works (index order) -->
+  <url>
+    <loc>https://toinova.com/works/Obuse%20Nursery%20School/Obuse%20Nursery%20School.html</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
   <url>
     <loc>https://toinova.com/works/Oki%20seaside%20plaza/Oki%20seaside%20plaza.html</loc>
     <lastmod>2026-08-26</lastmod>
