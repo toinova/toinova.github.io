@@ -78,27 +78,6 @@ nav a {
   margin: 0 0 8px;
 }
 
-/* Masonry の列幅の基準。masonry-init.js がギャラリーの先頭に挿入する高さ 0 の要素で、
-   1 コマぶんの幅だけを持つ。幅広画像が先頭に来ても列幅がぶれないようにするための土台。 */
-.image-gallery > .grid-sizer {
-  /* item は absolute なので 100% が padding box 基準なのに対し、この要素は通常フローなので
-     100% が content box 基準になる。padding 2 本ぶんの差を引かない式がちょうど 1 コマ幅と一致する。 */
-  width: calc((100% - var(--gallery-gap, 8px) * 2) / 3);
-  height: 0;
-  margin: 0;
-  padding: 0;
-  border: 0;
-}
-
-/* 極端に横長の画像は 2 コマ分（1 コマ幅 × 2 + ガター 1 本）を使って表示する。
-   どの画像を対象にするかは masonry-init.js の WIDE_RATIO が決める。 */
-.image-gallery > .gallery-item.wide {
-  width: calc(
-    (100% - var(--space-block, 10px) * 2 - var(--gallery-gap, 8px) * 2) / 3 * 2
-    + var(--gallery-gap, 8px)
-  );
-}
-
 /* 改修前などのラベルを画像の右下に重ねる */
 .image-gallery .image-container {
   position: relative;
